@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://ckykenlcwqdnc"]
+[gd_scene load_steps=8 format=3 uid="uid://ckykenlcwqdnc"]
 
 [ext_resource type="Texture2D" uid="uid://dcb4cyonfhigt" path="res://icon.svg" id="1_mb3t4"]
 [ext_resource type="Script" path="res://scripts/hero.gd" id="1_sixme"]
 [ext_resource type="PackedScene" uid="uid://bsflmm0xvyu0m" path="res://scenes/hurt_box.tscn" id="3_kq2gb"]
 [ext_resource type="PackedScene" uid="uid://y8n1pi0228h5" path="res://scenes/health_component.tscn" id="4_wshce"]
 [ext_resource type="AudioStream" uid="uid://bvb8a6ip4siyl" path="res://sound/hit.wav" id="5_m03lm"]
+[ext_resource type="AudioStream" uid="uid://br8ef3n2bxf6u" path="res://sound/button_down.wav" id="6_bgnj3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_16uax"]
 size = Vector2(53, 52)
@@ -35,6 +36,10 @@ max_health = 100
 stream = ExtResource("5_m03lm")
 
 [node name="Die" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Walk" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_bgnj3")
+volume_db = -2.255
 
 [connection signal="hit" from="HurtBox" to="." method="_on_hurt_box_hit"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
