@@ -30,9 +30,10 @@ func _physics_process(delta):
 
 func _on_health_component_died():
 	hide()
+	$Die.play()
 
 
 func _on_hurt_box_hit(name, damage, force, weapon_position):
-	$AudioStreamPlayer2D.play()
+	$Hurt.play()
 	velocity.x += force * (position.x - weapon_position.x)
 	
