@@ -31,6 +31,7 @@ func _physics_process(delta):
 
 
 func _on_health_component_died():
+	# death
 	hide()
 	$Die.play()
 
