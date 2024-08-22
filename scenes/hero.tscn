@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://ckykenlcwqdnc"]
+
+[ext_resource type="Texture2D" uid="uid://dcb4cyonfhigt" path="res://icon.svg" id="1_mb3t4"]
+[ext_resource type="Script" path="res://scripts/hero.gd" id="1_sixme"]
+[ext_resource type="PackedScene" uid="uid://bsflmm0xvyu0m" path="res://scenes/hurt_box.tscn" id="3_kq2gb"]
+[ext_resource type="PackedScene" uid="uid://y8n1pi0228h5" path="res://scenes/health_component.tscn" id="4_wshce"]
+[ext_resource type="AudioStream" uid="uid://bvb8a6ip4siyl" path="res://hit.wav" id="5_m03lm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_16uax"]
+size = Vector2(53, 52)
+
+[node name="Hero" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("1_sixme")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16.5, -16)
+shape = SubResource("RectangleShape2D_16uax")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(17, -15)
+scale = Vector2(0.445313, 0.445313)
+texture = ExtResource("1_mb3t4")
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_kq2gb")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(17, -16)
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_wshce")]
+max_health = 100
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_m03lm")
+
+[connection signal="hit" from="HurtBox" to="." method="_on_hurt_box_hit"]
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
+
+[editable path="HurtBox"]
