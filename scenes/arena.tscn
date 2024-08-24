@@ -1,13 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://dphxf1ksoo732"]
+[gd_scene load_steps=7 format=3 uid="uid://dphxf1ksoo732"]
 
 [ext_resource type="PackedScene" uid="uid://ckykenlcwqdnc" path="res://scenes/hero.tscn" id="1_0bxvj"]
 [ext_resource type="PackedScene" uid="uid://bynutfabpm73o" path="res://scenes/weapon_area.tscn" id="1_tt3xy"]
+[ext_resource type="PackedScene" uid="uid://gluony4m18s1" path="res://scenes/ball_bullet.tscn" id="3_lu81d"]
+[ext_resource type="PackedScene" uid="uid://cd33xdf68j23u" path="res://scenes/auto_gun.tscn" id="4_dbw1o"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gaf4h"]
 friction = 4.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aarsb"]
-size = Vector2(75, 156)
+size = Vector2(75, 53)
 
 [node name="Node2D" type="Node2D"]
 
@@ -25,10 +27,16 @@ damage = 20
 force = 30.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/WeaponArea"]
-position = Vector2(-12, 34)
+position = Vector2(48, -158)
 shape = SubResource("RectangleShape2D_aarsb")
 
 [node name="Hero" parent="." instance=ExtResource("1_0bxvj")]
 position = Vector2(124, 243)
+
+[node name="BallBullet" parent="." instance=ExtResource("3_lu81d")]
+position = Vector2(709, 166)
+
+[node name="AutoGun" parent="." instance=ExtResource("4_dbw1o")]
+position = Vector2(400, 367)
 
 [editable path="StaticBody2D/WeaponArea"]

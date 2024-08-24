@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cd33xdf68j23u"]
+
+[ext_resource type="Script" path="res://scripts/AutoGun.gd" id="1_y412l"]
+[ext_resource type="PackedScene" uid="uid://nf26y1cjorp1" path="res://scenes/bullet_emmiter.tscn" id="2_tlasq"]
+[ext_resource type="Texture2D" uid="uid://dcb4cyonfhigt" path="res://icon.svg" id="3_da4gg"]
+
+[node name="AutoGun" type="Node2D"]
+script = ExtResource("1_y412l")
+
+[node name="BulletEmmiter" parent="." instance=ExtResource("2_tlasq")]
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, 3.8147e-06)
+scale = Vector2(0.523438, 0.203125)
+texture = ExtResource("3_da4gg")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
