@@ -1,17 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://dphxf1ksoo732"]
+[gd_scene load_steps=8 format=3 uid="uid://dphxf1ksoo732"]
 
 [ext_resource type="PackedScene" uid="uid://ckykenlcwqdnc" path="res://scenes/hero.tscn" id="1_0bxvj"]
-[ext_resource type="PackedScene" uid="uid://bynutfabpm73o" path="res://scenes/weapon_area.tscn" id="1_tt3xy"]
-[ext_resource type="PackedScene" uid="uid://gluony4m18s1" path="res://scenes/ball_bullet.tscn" id="3_lu81d"]
+[ext_resource type="PackedScene" uid="uid://bynutfabpm73o" path="res://scenes/weapon_area.tscn" id="4_77dqc"]
 [ext_resource type="PackedScene" uid="uid://cd33xdf68j23u" path="res://scenes/auto_gun.tscn" id="4_dbw1o"]
+[ext_resource type="Texture2D" uid="uid://cym6s64fc45ur" path="res://art/testlevel.png" id="5_as2fp"]
+[ext_resource type="PackedScene" uid="uid://dy4hjcgj4wmyr" path="res://scenes/super_auto_gun.tscn" id="5_p20cq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gaf4h"]
 friction = 4.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_aarsb"]
-size = Vector2(75, 53)
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yvce2"]
 
-[node name="Node2D" type="Node2D"]
+[node name="arena" type="Node2D"]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 2
@@ -19,24 +19,71 @@ collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_gaf4h")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PackedVector2Array(-5, 567, 34, 254, 92, 566, 499, 563, 541, 580, 677, 584, 768, 553, 985, 577, 1104, 212, 1177, 557, 1157, 651, -4, 658)
+polygon = PackedVector2Array(48, 619, 305, 619, 300, 701, 45, 702)
 
-[node name="WeaponArea" parent="StaticBody2D" instance=ExtResource("1_tt3xy")]
-position = Vector2(513, 455)
-damage = 20
-force = 30.0
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(1500, -432)
+polygon = PackedVector2Array(48, 619, 242, 623, 248, 558, 297, 554, 303, 456, 430, 459, 434, 685, 293.949, 657.369, 289, 825, 42, 827)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/WeaponArea"]
-position = Vector2(48, -158)
-shape = SubResource("RectangleShape2D_aarsb")
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(180, -184)
+polygon = PackedVector2Array(139, 614, 231, 615, 228, 669, 139, 672)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(501, -47)
+polygon = PackedVector2Array(139, 614, 303, 605, 309, 482, 437, 491, 689, 478, 915, 254, 917, 621, 682, 628, 677, 525, 440.324, 543.902, 449, 682, 299, 693, 133, 701)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(237, -57)
+polygon = PackedVector2Array(320, 546, 320, 666, 139, 672)
 
 [node name="Hero" parent="." instance=ExtResource("1_0bxvj")]
-position = Vector2(124, 243)
-
-[node name="BallBullet" parent="." instance=ExtResource("3_lu81d")]
-position = Vector2(709, 166)
+position = Vector2(81, 518)
 
 [node name="AutoGun" parent="." instance=ExtResource("4_dbw1o")]
-position = Vector2(400, 367)
+position = Vector2(558, 445)
+rotation = -3.98633
 
-[editable path="StaticBody2D/WeaponArea"]
+[node name="AutoGun2" parent="." instance=ExtResource("4_dbw1o")]
+position = Vector2(1417, 174)
+rotation = -3.98633
+
+[node name="AutoGun4" parent="." instance=ExtResource("4_dbw1o")]
+position = Vector2(1327, 161)
+rotation = -3.98633
+
+[node name="AutoGun5" parent="." instance=ExtResource("4_dbw1o")]
+position = Vector2(999, 173)
+rotation = -5.11032
+
+[node name="AutoGun6" parent="." instance=ExtResource("4_dbw1o")]
+position = Vector2(298, 309)
+rotation = -5.11032
+
+[node name="AutoGun7" parent="." instance=ExtResource("4_dbw1o")]
+position = Vector2(454, 342)
+rotation = -4.29351
+
+[node name="AutoGun3" parent="." instance=ExtResource("4_dbw1o")]
+position = Vector2(801, 418)
+rotation = 0.00174533
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1197, 267)
+scale = Vector2(0.501, 0.501)
+texture = ExtResource("5_as2fp")
+
+[node name="Border" parent="." instance=ExtResource("4_77dqc")]
+instant_kill = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Border"]
+position = Vector2(655, 770)
+shape = SubResource("WorldBoundaryShape2D_yvce2")
+
+[node name="AutoGun8" parent="." instance=ExtResource("5_p20cq")]
+position = Vector2(842, 218)
+rotation = -3.88161
+
+[node name="AutoGun9" parent="." instance=ExtResource("5_p20cq")]
+position = Vector2(1203, 160)
+rotation = -3.88161

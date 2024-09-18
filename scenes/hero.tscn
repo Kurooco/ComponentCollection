@@ -1,33 +1,59 @@
-[gd_scene load_steps=8 format=3 uid="uid://ckykenlcwqdnc"]
+[gd_scene load_steps=14 format=3 uid="uid://ckykenlcwqdnc"]
 
-[ext_resource type="Texture2D" uid="uid://dcb4cyonfhigt" path="res://icon.svg" id="1_mb3t4"]
 [ext_resource type="Script" path="res://scripts/hero.gd" id="1_sixme"]
+[ext_resource type="Texture2D" uid="uid://bf0ph1qb5gaqb" path="res://art/duck_body.png" id="2_amiry"]
 [ext_resource type="PackedScene" uid="uid://bsflmm0xvyu0m" path="res://scenes/hurt_box.tscn" id="3_kq2gb"]
 [ext_resource type="PackedScene" uid="uid://y8n1pi0228h5" path="res://scenes/health_component.tscn" id="4_wshce"]
 [ext_resource type="AudioStream" uid="uid://bvb8a6ip4siyl" path="res://sound/hit.wav" id="5_m03lm"]
 [ext_resource type="AudioStream" uid="uid://br8ef3n2bxf6u" path="res://sound/button_down.wav" id="6_bgnj3"]
+[ext_resource type="Texture2D" uid="uid://b6c5yqbnbnj4i" path="res://art/duck_head.png" id="7_cpl62"]
+[ext_resource type="Texture2D" uid="uid://dusmb2fmox8s7" path="res://art/duck_head_open.png" id="8_7257g"]
+[ext_resource type="PackedScene" uid="uid://nf26y1cjorp1" path="res://scenes/bullet_emmiter.tscn" id="8_ew2q5"]
+[ext_resource type="PackedScene" uid="uid://1jrov1w5rran" path="res://scenes/duck_ball_bullet.tscn" id="10_mdmjr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_16uax"]
-size = Vector2(53, 52)
+size = Vector2(25, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ksupv"]
+size = Vector2(20, 38)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eksid"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_cpl62")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_7257g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Hero" type="CharacterBody2D"]
 collision_mask = 2
+floor_max_angle = 1.18857
 script = ExtResource("1_sixme")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(16.5, -16)
+position = Vector2(1, -20)
 shape = SubResource("RectangleShape2D_16uax")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(17, -15)
+[node name="Body" type="Sprite2D" parent="."]
+position = Vector2(0, -19)
 scale = Vector2(0.445313, 0.445313)
-texture = ExtResource("1_mb3t4")
+texture = ExtResource("2_amiry")
 
-[node name="HurtBox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_kq2gb")]
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_component", "collision_shape") instance=ExtResource("3_kq2gb")]
 health_component = NodePath("../HealthComponent")
+friendly = true
+collision_shape = NodePath("CollisionShape2D")
 
-[node name="CollisionShape2D" parent="HurtBox" index="0"]
-position = Vector2(17, -16)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(1, -20)
+shape = SubResource("RectangleShape2D_ksupv")
+debug_color = Color(0.968627, 0, 0.470588, 0.419608)
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_wshce")]
 max_health = 100
@@ -40,6 +66,25 @@ stream = ExtResource("5_m03lm")
 [node name="Walk" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_bgnj3")
 volume_db = -2.255
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.7, 0.7)
+position_smoothing_enabled = true
+
+[node name="Head" type="AnimatedSprite2D" parent="."]
+z_index = 5
+position = Vector2(-1, -31)
+scale = Vector2(0.425, 0.455)
+sprite_frames = SubResource("SpriteFrames_eksid")
+offset = Vector2(7.05882, -2.1978)
+
+[node name="BulletEmmiter" parent="." instance=ExtResource("8_ew2q5")]
+position = Vector2(0, -31)
+bullets = ExtResource("10_mdmjr")
+friendly = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.001
 
 [connection signal="hit" from="HurtBox" to="." method="_on_hurt_box_hit"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

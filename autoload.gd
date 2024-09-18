@@ -1,7 +1,3 @@
 extends Node
 
-enum weapon_class
-{
-	SWORD, 
-	GUN
-}
+var main_node

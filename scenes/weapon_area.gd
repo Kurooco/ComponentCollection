@@ -2,7 +2,9 @@ extends Area2D
 
 signal hit_landed
 @export var damage : int
-@export var force : float
+@export var force : Vector2
+@export var instant_kill : bool
+@export var friendly : bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

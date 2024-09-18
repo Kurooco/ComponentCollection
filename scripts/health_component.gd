@@ -16,3 +16,6 @@ func take_damage(amount):
 		
 func heal(amount):
 	current_health = min(current_health+amount, max_health)
+	
+func reset():
+	current_health = max_health
