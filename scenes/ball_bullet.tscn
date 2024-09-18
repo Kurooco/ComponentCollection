@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://gluony4m18s1"]
+[gd_scene load_steps=11 format=3 uid="uid://gluony4m18s1"]
 
 [ext_resource type="Script" path="res://scenes/ball_bullet.gd" id="1_26fkd"]
 [ext_resource type="PackedScene" uid="uid://bynutfabpm73o" path="res://scenes/weapon_area.tscn" id="2_1feqt"]
+[ext_resource type="Texture2D" uid="uid://dy1ohvy5bcr18" path="res://art/ball_bullet.png" id="3_kypjl"]
+[ext_resource type="Texture2D" uid="uid://dcb4cyonfhigt" path="res://icon.svg" id="4_erxd3"]
+[ext_resource type="PackedScene" uid="uid://bsflmm0xvyu0m" path="res://scenes/hurt_box.tscn" id="5_6n3sp"]
+[ext_resource type="PackedScene" uid="uid://y8n1pi0228h5" path="res://scenes/health_component.tscn" id="6_11cn3"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xffwi"]
 bounce = 0.7
@@ -12,9 +16,11 @@ radius = 12.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_2bdpc"]
 radius = 13.0096
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n6yoo"]
+
 [node name="BallBullet" type="RigidBody2D"]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 8
+collision_mask = 10
 physics_material_override = SubResource("PhysicsMaterial_xffwi")
 script = ExtResource("1_26fkd")
 
@@ -23,7 +29,6 @@ shape = SubResource("CircleShape2D_gjiut")
 
 [node name="WeaponArea" parent="." instance=ExtResource("2_1feqt")]
 damage = 5
-force = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponArea"]
 shape = SubResource("CircleShape2D_2bdpc")
@@ -33,5 +38,39 @@ debug_color = Color(0.964706, 0, 0.494118, 0.419608)
 wait_time = 4.0
 autostart = true
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_kypjl")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 3
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("4_erxd3")
+direction = Vector2(0, -1)
+spread = 92.69
+initial_velocity_max = 153.85
+angular_velocity_min = -147.69
+angular_velocity_max = 147.69
+scale_amount_min = 0.1
+scale_amount_max = 0.2
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_component", "collision_shape") instance=ExtResource("5_6n3sp")]
+collision_mask = 16
+health_component = NodePath("../HealthComponent")
+collision_shape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("RectangleShape2D_n6yoo")
+
+[node name="HealthComponent" parent="." instance=ExtResource("6_11cn3")]
+max_health = 1
+
 [connection signal="hit_landed" from="WeaponArea" to="." method="_on_weapon_area_hit_landed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="finished" from="CPUParticles2D" to="." method="_on_cpu_particles_2d_finished"]
+[connection signal="died" from="HealthComponent" to="." method="die"]
+[connection signal="died" from="HealthComponent" to="HurtBox" method="disable"]
