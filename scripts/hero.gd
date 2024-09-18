@@ -23,7 +23,7 @@ func _physics_process(delta):
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction = Input.get_axis("ui_left", "ui_right")
+	var direction = Input.get_axis("left", "right")
 	if direction:
 		if(!$Walk.playing):
 			$Walk.play()
@@ -44,9 +44,11 @@ func _physics_process(delta):
 	# fire bullets
 	if(Input.is_action_pressed("fire")):
 		$Head.frame = 1
-		$BulletEmmiter.fire_bullet_with_force((get_global_mouse_position()-position).normalized() * FIRE_VELOCITY)
+		if($Timer.is_stopped()):
+			$Timer.start()
 	else:
 		$Head.frame = 0
+		$Timer.stop()
 
 
 func _on_health_component_died():
@@ -69,3 +71,7 @@ func die():
 	position = starting_position
 	velocity = Vector2.ZERO
 	$HealthComponent.reset()
+
+
+func _on_timer_timeout():
+	$BulletEmmiter.fire_bullet_with_force((get_global_mouse_position()-position).normalized() * FIRE_VELOCITY)

@@ -84,9 +84,10 @@ bullets = ExtResource("10_mdmjr")
 friendly = true
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.001
+wait_time = 0.1
 
 [connection signal="hit" from="HurtBox" to="." method="_on_hurt_box_hit"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 
 [editable path="HurtBox"]
