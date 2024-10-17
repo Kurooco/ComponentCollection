@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 const SPEED = 100.0
-const JUMP_VELOCITY = -1200.0
+const JUMP_VELOCITY = -1000.0
 const FIRE_VELOCITY = 1000
 var starting_position
 

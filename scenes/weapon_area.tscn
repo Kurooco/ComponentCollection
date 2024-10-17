@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bynutfabpm73o"]
 
-[ext_resource type="Script" path="res://scenes/weapon_area.gd" id="1_awrp2"]
+[ext_resource type="Script" path="res://scripts/weapon_area.gd" id="1_awrp2"]
 
 [node name="WeaponArea" type="Area2D"]
 collision_layer = 4

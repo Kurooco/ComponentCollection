@@ -37,7 +37,7 @@ shape = SubResource("RectangleShape2D_xxnp0")
 debug_color = Color(0.94902, 0, 0.584314, 0.419608)
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_wn6b6")]
-max_health = 50
+max_health = 10
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 modulate = Color(1, 0, 0, 1)

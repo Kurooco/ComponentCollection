@@ -87,3 +87,7 @@ rotation = -3.88161
 [node name="AutoGun9" parent="." instance=ExtResource("5_p20cq")]
 position = Vector2(1203, 160)
 rotation = -3.88161
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1016, 314)
+zoom = Vector2(0.5, 0.5)

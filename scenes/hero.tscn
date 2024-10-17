@@ -67,10 +67,6 @@ stream = ExtResource("5_m03lm")
 stream = ExtResource("6_bgnj3")
 volume_db = -2.255
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.7, 0.7)
-position_smoothing_enabled = true
-
 [node name="Head" type="AnimatedSprite2D" parent="."]
 z_index = 5
 position = Vector2(-1, -31)

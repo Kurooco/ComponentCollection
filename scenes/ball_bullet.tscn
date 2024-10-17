@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://gluony4m18s1"]
 
-[ext_resource type="Script" path="res://scenes/ball_bullet.gd" id="1_26fkd"]
+[ext_resource type="Script" path="res://scripts/ball_bullet.gd" id="1_tbick"]
 [ext_resource type="PackedScene" uid="uid://bynutfabpm73o" path="res://scenes/weapon_area.tscn" id="2_1feqt"]
 [ext_resource type="Texture2D" uid="uid://dy1ohvy5bcr18" path="res://art/ball_bullet.png" id="3_kypjl"]
 [ext_resource type="Texture2D" uid="uid://dcb4cyonfhigt" path="res://icon.svg" id="4_erxd3"]
@@ -22,7 +22,7 @@ radius = 13.0096
 collision_layer = 8
 collision_mask = 10
 physics_material_override = SubResource("PhysicsMaterial_xffwi")
-script = ExtResource("1_26fkd")
+script = ExtResource("1_tbick")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gjiut")
