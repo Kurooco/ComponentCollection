@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dy4hjcgj4wmyr"]
+[gd_scene load_steps=10 format=3 uid="uid://dy4hjcgj4wmyr"]
 
 [ext_resource type="Script" path="res://scripts/AutoGun.gd" id="1_oqyok"]
 [ext_resource type="PackedScene" uid="uid://nf26y1cjorp1" path="res://scenes/bullet_emmiter.tscn" id="2_8ra4e"]
 [ext_resource type="Texture2D" uid="uid://c0ml024xsb2kd" path="res://art/triangle.png" id="3_5sltl"]
+[ext_resource type="PackedScene" uid="uid://gluony4m18s1" path="res://scenes/ball_bullet.tscn" id="3_jiewm"]
 [ext_resource type="PackedScene" uid="uid://bsflmm0xvyu0m" path="res://scenes/hurt_box.tscn" id="4_puwea"]
 [ext_resource type="PackedScene" uid="uid://y8n1pi0228h5" path="res://scenes/health_component.tscn" id="5_wn6b6"]
 [ext_resource type="Texture2D" uid="uid://dcb4cyonfhigt" path="res://icon.svg" id="6_d7dtw"]
@@ -16,6 +17,7 @@ scale = Vector2(2, 2)
 script = ExtResource("1_oqyok")
 
 [node name="BulletEmmiter" parent="." instance=ExtResource("2_8ra4e")]
+bullet_type = ExtResource("3_jiewm")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1

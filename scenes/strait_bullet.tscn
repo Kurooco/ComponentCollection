@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://dxd000yja75jq"]
+
+[ext_resource type="PackedScene" uid="uid://bynutfabpm73o" path="res://scenes/weapon_area.tscn" id="1_qste1"]
+[ext_resource type="Script" path="res://scripts/strait_bullet.gd" id="1_vio4y"]
+[ext_resource type="Texture2D" uid="uid://dy1ohvy5bcr18" path="res://art/ball_bullet.png" id="2_07hya"]
+[ext_resource type="PackedScene" uid="uid://dhso3l20280hu" path="res://scenes/death_handler.tscn" id="4_qfery"]
+[ext_resource type="PackedScene" uid="uid://bsflmm0xvyu0m" path="res://scenes/hurt_box.tscn" id="5_husor"]
+[ext_resource type="PackedScene" uid="uid://y8n1pi0228h5" path="res://scenes/health_component.tscn" id="6_3oy6h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5lkxb"]
+size = Vector2(62, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dlkoa"]
+size = Vector2(62, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1foqv"]
+size = Vector2(68, 24)
+
+[node name="StraitBullet" type="Area2D"]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_vio4y")
+friendly = true
+
+[node name="WeaponArea" parent="." instance=ExtResource("1_qste1")]
+collision_layer = 16
+damage = 1
+friendly = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponArea"]
+position = Vector2(7, 1)
+shape = SubResource("RectangleShape2D_5lkxb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4, -1.90735e-06)
+scale = Vector2(1, 0.37)
+texture = ExtResource("2_07hya")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5, 1)
+shape = SubResource("RectangleShape2D_dlkoa")
+debug_color = Color(0.898039, 0.247059, 0.501961, 0.419608)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="DeathHandler" parent="." node_paths=PackedStringArray("disable_collision", "sprite_to_hide") instance=ExtResource("4_qfery")]
+disable_collision = [NodePath("../WeaponArea/CollisionShape2D"), NodePath("../CollisionShape2D"), NodePath("../HurtBox/CollisionShape2D")]
+sprite_to_hide = NodePath("../Sprite2D")
+time_until_death = 4.0
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_component", "collision_shape") instance=ExtResource("5_husor")]
+collision_mask = 32
+health_component = NodePath("../HealthComponent")
+friendly = true
+collision_shape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(5, 1)
+shape = SubResource("RectangleShape2D_1foqv")
+
+[node name="HealthComponent" parent="." instance=ExtResource("6_3oy6h")]
+max_health = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://gluony4m18s1"]
+[gd_scene load_steps=12 format=3 uid="uid://gluony4m18s1"]
 
 [ext_resource type="Script" path="res://scripts/ball_bullet.gd" id="1_tbick"]
 [ext_resource type="PackedScene" uid="uid://bynutfabpm73o" path="res://scenes/weapon_area.tscn" id="2_1feqt"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dcb4cyonfhigt" path="res://icon.svg" id="4_erxd3"]
 [ext_resource type="PackedScene" uid="uid://bsflmm0xvyu0m" path="res://scenes/hurt_box.tscn" id="5_6n3sp"]
 [ext_resource type="PackedScene" uid="uid://y8n1pi0228h5" path="res://scenes/health_component.tscn" id="6_11cn3"]
+[ext_resource type="PackedScene" uid="uid://dhso3l20280hu" path="res://scenes/death_handler.tscn" id="7_ovop7"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xffwi"]
 bounce = 0.7
@@ -33,10 +34,6 @@ damage = 5
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponArea"]
 shape = SubResource("CircleShape2D_2bdpc")
 debug_color = Color(0.964706, 0, 0.494118, 0.419608)
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 4.0
-autostart = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -1)
@@ -69,8 +66,13 @@ shape = SubResource("RectangleShape2D_n6yoo")
 [node name="HealthComponent" parent="." instance=ExtResource("6_11cn3")]
 max_health = 1
 
+[node name="DeathHandler" parent="." node_paths=PackedStringArray("particles", "disable_collision", "sprite_to_hide") instance=ExtResource("7_ovop7")]
+particles = NodePath("../CPUParticles2D")
+disable_collision = [NodePath("../WeaponArea/CollisionShape2D")]
+sprite_to_hide = NodePath("../Sprite2D")
+time_until_death = 4.0
+
 [connection signal="hit_landed" from="WeaponArea" to="." method="_on_weapon_area_hit_landed"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="finished" from="CPUParticles2D" to="." method="_on_cpu_particles_2d_finished"]
 [connection signal="died" from="HealthComponent" to="." method="die"]
 [connection signal="died" from="HealthComponent" to="HurtBox" method="disable"]

@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dphxf1ksoo732"]
+[gd_scene load_steps=7 format=3 uid="uid://dphxf1ksoo732"]
 
 [ext_resource type="PackedScene" uid="uid://ckykenlcwqdnc" path="res://scenes/hero.tscn" id="1_0bxvj"]
 [ext_resource type="PackedScene" uid="uid://bynutfabpm73o" path="res://scenes/weapon_area.tscn" id="4_77dqc"]
 [ext_resource type="PackedScene" uid="uid://cd33xdf68j23u" path="res://scenes/auto_gun.tscn" id="4_dbw1o"]
 [ext_resource type="Texture2D" uid="uid://cym6s64fc45ur" path="res://art/testlevel.png" id="5_as2fp"]
-[ext_resource type="PackedScene" uid="uid://dy4hjcgj4wmyr" path="res://scenes/super_auto_gun.tscn" id="5_p20cq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gaf4h"]
 friction = 4.0
@@ -41,32 +40,8 @@ polygon = PackedVector2Array(320, 546, 320, 666, 139, 672)
 position = Vector2(81, 518)
 
 [node name="AutoGun" parent="." instance=ExtResource("4_dbw1o")]
-position = Vector2(558, 445)
-rotation = -3.98633
-
-[node name="AutoGun2" parent="." instance=ExtResource("4_dbw1o")]
-position = Vector2(1417, 174)
-rotation = -3.98633
-
-[node name="AutoGun4" parent="." instance=ExtResource("4_dbw1o")]
-position = Vector2(1327, 161)
-rotation = -3.98633
-
-[node name="AutoGun5" parent="." instance=ExtResource("4_dbw1o")]
-position = Vector2(999, 173)
-rotation = -5.11032
-
-[node name="AutoGun6" parent="." instance=ExtResource("4_dbw1o")]
-position = Vector2(298, 309)
-rotation = -5.11032
-
-[node name="AutoGun7" parent="." instance=ExtResource("4_dbw1o")]
-position = Vector2(454, 342)
-rotation = -4.29351
-
-[node name="AutoGun3" parent="." instance=ExtResource("4_dbw1o")]
-position = Vector2(801, 418)
-rotation = 0.00174533
+position = Vector2(983, 369)
+rotation = -1.62316
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1197, 267)
@@ -79,14 +54,6 @@ instant_kill = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Border"]
 position = Vector2(655, 770)
 shape = SubResource("WorldBoundaryShape2D_yvce2")
-
-[node name="AutoGun8" parent="." instance=ExtResource("5_p20cq")]
-position = Vector2(842, 218)
-rotation = -3.88161
-
-[node name="AutoGun9" parent="." instance=ExtResource("5_p20cq")]
-position = Vector2(1203, 160)
-rotation = -3.88161
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1016, 314)

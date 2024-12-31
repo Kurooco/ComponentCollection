@@ -15,14 +15,9 @@ func _process(delta):
 func _on_weapon_area_hit_landed():
 	die()
 
-
-func _on_timer_timeout():
-	die()
-
 func die():
-	$CPUParticles2D.emitting = true
-	$Sprite2D.hide()
-	$WeaponArea/CollisionShape2D.set_deferred("disabled", true)
+	$DeathHandler.die()
 
 func _on_cpu_particles_2d_finished():
 	queue_free()
+	

@@ -74,4 +74,5 @@ func die():
 
 
 func _on_timer_timeout():
-	$BulletEmmiter.fire_bullet_with_force((get_global_mouse_position()-position).normalized() * FIRE_VELOCITY)
+	$BulletEmmiter.fire_bullet_with_rotation($Head.rotation)
+	#$BulletEmmiter.fire_bullet_with_force((get_global_mouse_position()-position).normalized() * FIRE_VELOCITY)
