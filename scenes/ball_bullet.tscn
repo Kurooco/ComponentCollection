@@ -64,7 +64,7 @@ collision_shape = NodePath("CollisionShape2D")
 shape = SubResource("RectangleShape2D_n6yoo")
 
 [node name="HealthComponent" parent="." instance=ExtResource("6_11cn3")]
-max_health = 1
+max_health = 2
 
 [node name="DeathHandler" parent="." node_paths=PackedStringArray("particles", "disable_collision", "sprite_to_hide") instance=ExtResource("7_ovop7")]
 particles = NodePath("../CPUParticles2D")

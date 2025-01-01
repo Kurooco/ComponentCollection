@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b6c5yqbnbnj4i" path="res://art/duck_head.png" id="7_cpl62"]
 [ext_resource type="Texture2D" uid="uid://dusmb2fmox8s7" path="res://art/duck_head_open.png" id="8_7257g"]
 [ext_resource type="PackedScene" uid="uid://nf26y1cjorp1" path="res://scenes/bullet_emmiter.tscn" id="8_ew2q5"]
-[ext_resource type="PackedScene" uid="uid://dxd000yja75jq" path="res://scenes/strait_bullet.tscn" id="10_fuy4d"]
+[ext_resource type="PackedScene" uid="uid://1jrov1w5rran" path="res://scenes/duck_ball_bullet.tscn" id="10_bwkyk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_16uax"]
 size = Vector2(25, 40)
@@ -76,7 +76,7 @@ offset = Vector2(7.05882, -2.1978)
 
 [node name="BulletEmmiter" parent="." instance=ExtResource("8_ew2q5")]
 position = Vector2(0, -31)
-bullet_type = ExtResource("10_fuy4d")
+bullet_type = ExtResource("10_bwkyk")
 friendly = true
 
 [node name="Timer" type="Timer" parent="."]

@@ -9,9 +9,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	#Vector2(cos(rotation), sin(rotation))*1000
-	print_debug(rotation)
-	move_local_x(cos(rotation))
-	move_local_y(sin(rotation))
+	#print_debug(rotation)
+	move_local_x(10)
+	#position.x += cos(rotation/2)
+	#position.y += sin(rotation/2)
 
 
 func _on_body_entered(body):
